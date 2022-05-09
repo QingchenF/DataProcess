@@ -12,3 +12,9 @@ def ToolboxCSV(filename = 'filename.csv',list=[]):
         else:
             file.write(str(tra))
             file.write('\n')
+
+#Define a function that takes the upper triangle.Working with Symmetric Matrices
+def upper_tri_indexing(matirx):
+    m = matirx.shape[0]
+    r,c = np.triu_indices(m,1)
+    return matirx[r,c]
