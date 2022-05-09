@@ -60,9 +60,6 @@ for l in Predict_Score:
     print(str(l))
     fw.write(str(l))
     fw.write('\n')
-    #res = list_res.append(l)
-    #print(str(Predict_Score[l]))
-    #fw.write(str(Predict_Score[l]))
 
 #print('X_train',X_train)
 #print('y_train',y_train)
