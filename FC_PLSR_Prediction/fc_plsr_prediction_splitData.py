@@ -55,18 +55,13 @@ for m in y_test:
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
 
-#Define a function that takes the upper triangle.Working with Symmetric Matrices
-def upper_tri_indexing(matirx):
-    m = matirx.shape[0]
-    r,c = np.triu_indices(m,1)
-    return matirx[r,c]
 #Train
 files = X_train[:]
 files_data = []
 for i in files:
     img_data = nib.load(i)
     img_data = img_data.get_data()
-    img_data_reshape = upper_tri_indexing(img_data)
+    img_data_reshape = tb.upper_tri_indexing(img_data)
     files_data.append(img_data_reshape)
 
 Train_data = np.asarray(files_data)
@@ -77,7 +72,7 @@ Test_list = []
 for j in Test_files:
     test_data = nib.load(j)
     test_data = test_data.get_data()
-    test_data_reshape = upper_tri_indexing(test_data)
+    test_data_reshape = tb.upper_tri_indexing(test_data)
     Test_list.append(test_data_reshape)
 Test_data = np.asarray(Test_list)
 
