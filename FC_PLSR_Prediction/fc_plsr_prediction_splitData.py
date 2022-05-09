@@ -9,9 +9,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import joblib
 import ToolBox.ToolBox as tb
-import os
-#Loading Data
 
+
+#Loading Data
 data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
 label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
 
