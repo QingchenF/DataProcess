@@ -85,7 +85,7 @@ predict_model = GridSearchCV(plsr,param_grid,cv=5)
 predict_model.fit(Train_data,Train_label)
 Predict_Score = predict_model.predict(Test_data)
 #save model param
-joblib.dump(predict_model,"pls_model.pkl")
+joblib.dump(predict_model, "../pls_model.pkl")
 
 Corr = np.corrcoef(Predict_Score.T,Test_label)
 MAE_inv = np.mean(np.abs(Predict_Score - Test_label))
@@ -93,7 +93,7 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-fw = open("./Predict_Score_Conduct.csv",mode='w')
+fw = open("../Predict_Score_Conduct.csv", mode='w')
 for l in Predict_Score:
     fw.write(str(l))
     fw.write('\n')

@@ -16,22 +16,22 @@ label = label_files_all['Int']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=1)
 
-f_xtrain = open("./Note_Res_bagging/train_set_b.csv",mode='w')
+f_xtrain = open("../Note_Res_bagging/train_set_b.csv", mode='w')
 for i in X_train:
     f_xtrain.write(i)
     f_xtrain.write('\n')
 
-f_ytrain = open("./Note_Res_bagging/train_y_b.csv",mode='w')
+f_ytrain = open("../Note_Res_bagging/train_y_b.csv", mode='w')
 for j in y_train:
     f_ytrain.write(str(j))
     f_ytrain.write('\n')
 
-f_xtest = open("./Note_Res_bagging/test_set_b.csv",mode='w')
+f_xtest = open("../Note_Res_bagging/test_set_b.csv", mode='w')
 for n in X_test:
     f_xtest.write(n)
     f_xtest.write('\n')
 
-f_ytest = open("./Note_Res_bagging/test_y_b.csv",mode='w')
+f_ytest = open("../Note_Res_bagging/test_y_b.csv", mode='w')
 for m in y_test:
     f_ytest.write(str(m))
     f_ytest.write('\n')
@@ -92,7 +92,7 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-fw = open("./Note_Res_bagging/Predict_Score_Bagging.csv",mode='w')
+fw = open("../Note_Res_bagging/Predict_Score_Bagging.csv", mode='w')
 for l in Predict_Score:
     fw.write(str(l))
     fw.write('\n')
