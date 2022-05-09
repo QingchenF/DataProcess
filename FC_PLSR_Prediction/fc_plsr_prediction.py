@@ -61,7 +61,4 @@ for l in Predict_Score:
     fw.write(str(l))
     fw.write('\n')
 
-#print('X_train',X_train)
-#print('y_train',y_train)
-#print('X_test',X_test)
-#print('y_test',y_test)
+
