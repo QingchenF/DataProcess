@@ -12,8 +12,8 @@ import FC_PLSR_Prediction.ToolBox.ToolBox as tb
 
 
 #Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
+data_files_all = sorted(glob.glob("/home/cuizaixu_lab/fanqingchen/DATA/ABCD_FC_10min/*.nii"),reverse=True)
+label_files_all = pd.read_csv("/home/cuizaixu_lab/fanqingchen/DATA/ABCD_FC_10min/ABCD_CBCL_L.csv")
 
 #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
 #label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
@@ -24,34 +24,11 @@ label = label_files_all['Conduct']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
 
-
 tb.ToolboxCSV('train_set_test.csv',X_train)
 tb.ToolboxCSV('train_y_test.csv',y_train)
 tb.ToolboxCSV('test_set_test.csv',X_test)
 tb.ToolboxCSV('test_y_test.csv',y_test)
 
-
-'''
-f_xtrain = open("./Note_Res/train_set",mode='w')
-for i in X_train:
-    f_xtrain.write(i)
-    f_xtrain.write('\n')
-
-f_ytrain = open("./Note_Res/train_y",mode='w')
-for j in y_train:
-    f_ytrain.write(str(j))
-    f_ytrain.write('\n')
-
-f_xtest = open("./Note_Res/test_set",mode='w')
-for n in X_test:
-    f_xtest.write(n)
-    f_xtest.write('\n')
-
-f_ytest = open("./Note_Res/test_y",mode='w')
-for m in y_test:
-    f_ytest.write(str(m))
-    f_ytest.write('\n')
-'''
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
 
@@ -85,7 +62,7 @@ predict_model = GridSearchCV(plsr,param_grid,cv=5)
 predict_model.fit(Train_data,Train_label)
 Predict_Score = predict_model.predict(Test_data)
 #save model param
-joblib.dump(predict_model, "../pls_model.pkl")
+joblib.dump(predict_model, "./pls_model.pkl")
 
 Corr = np.corrcoef(Predict_Score.T,Test_label)
 MAE_inv = np.mean(np.abs(Predict_Score - Test_label))
@@ -93,9 +70,7 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-fw = open("../Predict_Score_Conduct.csv", mode='w')
-for l in Predict_Score:
-    fw.write(str(l))
-    fw.write('\n')
+tb.ToolboxCSV('Predict_Score_Conduct.csv',Predict_Score)
+
 
 
