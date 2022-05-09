@@ -13,7 +13,7 @@ def ToolboxCSV(filename = 'filename.csv',list=[]):
             file.write(str(tra))
             file.write('\n')
 #generate a experiment file
-def ToolboxCSV_srtver(filename = 'filename.csv',list=[]):
+def ToolboxCSV_server(filename = 'filename.csv',list=[]):
     path = "/GPFS/cuizaixu_lab_permanent/fanqingchen/Res/Note_Res/"
     file = open(path+filename,mode='w')
     for tra in list :
