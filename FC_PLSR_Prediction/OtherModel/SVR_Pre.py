@@ -79,9 +79,6 @@ Test_data = np.asarray(Test_list)
 #Model
 predict_model = SVR()
 predict_model.fit(Train_data,Train_label)
-#ElasticNet coefficients
-print('ElasticNet coefficients =========>',predict_model.alpha_)
-print('ElasticNet parameters =========>',predict_model.coef_)
 
 Predict_Score = predict_model.predict(Test_data)
 
