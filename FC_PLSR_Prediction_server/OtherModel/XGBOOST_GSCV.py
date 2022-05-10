@@ -8,28 +8,27 @@ from sklearn.cross_decomposition import PLSRegression
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import joblib
-import FC_PLSR_Prediction.ToolBox.ToolBox as tb
+import ToolBox as tb
 import xgboost as xgb
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 #Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
-
+data_files_all = sorted(glob.glob("/home/cuizaixu_lab/fanqingchen/DATA/ABCD_FC_10min/*.nii"),reverse=True)
+label_files_all = pd.read_csv("/home/cuizaixu_lab/fanqingchen/DATA/ABCD_FC_10min/ABCD_CBCL_L.csv")
 #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
 #label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
-tb.ToolboxCSV('data_all.csv',data_files_all)
+tb.ToolboxCSV_server('data_all.csv',data_files_all)
 
 print(label_files_all)
 label = label_files_all['General']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
 
-tb.ToolboxCSV('train_set_test.csv',X_train)
-tb.ToolboxCSV('train_y_test.csv',y_train)
-tb.ToolboxCSV('test_set_test.csv',X_test)
-tb.ToolboxCSV('test_y_test.csv',y_test)
+tb.ToolboxCSV_server('train_set_test.csv',X_train)
+tb.ToolboxCSV_server('train_y_test.csv',y_train)
+tb.ToolboxCSV_server('test_set_test.csv',X_test)
+tb.ToolboxCSV_server('test_y_test.csv',y_test)
 
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
@@ -80,7 +79,7 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-tb.ToolboxCSV('Predict_Score_Conduct.csv',Predict_Score)
+tb.ToolboxCSV_server('Predict_Score_Conduct.csv',Predict_Score)
 
 
 

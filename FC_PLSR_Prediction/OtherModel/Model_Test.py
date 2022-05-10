@@ -48,7 +48,22 @@ for j in Test_files:
 Test_data = np.asarray(Test_list)
 
 #Model
+Hyper_param = {'max_depth':range(3,10,2)}
+predict_model = GridSearchCV(estimator=xgb.XGBRegressor(booster='gbtree',learning_rate=0.1, n_estimators=160, verbosity=1,objective='reg:squarederror'),
+                             param_grid=Hyper_param,
+                             scoring='neg_mean_absolute_error',
+                             n_jobs=4,
+                             verbose=1,
+                             cv=5)
+predict_model.fit(Train_data,Train_label)
+Predict_Score = predict_model.predict(Test_data)
 
+print("-best_estimator-",predict_model.best_estimator_,"-",
+      "-best_params-",   predict_model.best_params_,"-",
+      "-best_score-",    predict_model.best_score_
+      )
+print('Predict_Score:',Predict_Score)
+'''
 #原生态xgboost使用该参数，调sklearn不用设置这个params
 params = {
     'booster': 'gbtree',
@@ -75,7 +90,7 @@ model = xgb.train(plst, dtrain, num_rounds)
 dtest = xgb.DMatrix(Test_data)
 ans = model.predict(dtest)
 print(ans)
-
+'''
 '''
 kf = KFold(n_splits=2,shuffle=True,random_state=1)
 for Train_data_index,Test_data_index in kf.split(Train_data,Train_label):
