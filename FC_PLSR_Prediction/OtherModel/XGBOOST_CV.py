@@ -6,28 +6,32 @@ import glob
 import csv as csv
 import pandas as pd
 from sklearn.cross_decomposition import PLSRegression
-from sklearn.model_selection import KFold,train_test_split
+from sklearn.model_selection import KFold, train_test_split
 from sklearn.model_selection import GridSearchCV
-from sklearn.ensemble import  BaggingRegressor
+from sklearn.ensemble import BaggingRegressor
 import xgboost as xgb
 from xgboost import plot_importance
 from matplotlib import pyplot as plt
-#Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"),reverse=True)
+
+# Loading Data
+data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"), reverse=True)
 label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
 label = label_files_all['General']
 
-X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
-
+X_train, X_test, y_train, y_test = train_test_split(data_files_all, label, test_size=0.2, random_state=0)
 
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
-#Define a function that takes the upper triangle
+
+
+# Define a function that takes the upper triangle
 def upper_tri_indexing(matirx):
     m = matirx.shape[0]
-    r,c = np.triu_indices(m,1)
-    return matirx[r,c]
-#Train
+    r, c = np.triu_indices(m, 1)
+    return matirx[r, c]
+
+
+# Train
 files = X_train[:]
 files_data = []
 for i in files:
@@ -37,7 +41,7 @@ for i in files:
     files_data.append(img_data_reshape)
 
 Train_data = np.asarray(files_data)
-#Test Data
+# Test Data
 Test_files = X_test[:]
 Test_list = []
 for j in Test_files:
@@ -47,9 +51,9 @@ for j in Test_files:
     Test_list.append(test_data_reshape)
 Test_data = np.asarray(Test_list)
 
-#Model
+# Model
 
-#原生态xgboost使用该参数，调sklearn不用设置这个params
+# 原生态xgboost使用该参数，调sklearn不用设置这个params
 params = {
     'booster': 'gbtree',
     'objective': 'reg:linear',
@@ -66,7 +70,7 @@ params = {
 }
 
 dtrain = xgb.DMatrix(Train_data, Train_label)
-print(dtrain,type(dtrain))
+print(dtrain, type(dtrain))
 num_rounds = 300
 plst = list(params.items())
 model = xgb.train(plst, dtrain, num_rounds)
@@ -82,7 +86,7 @@ for Train_data_index,Test_data_index in kf.split(Train_data,Train_label):
      predict_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:gamma')
      predict_model.fit(Train_data[Train_data_index],Train_label[Train_data_index])
      Predict_Score = predict_model.predict(Test_data[Test_data_index])
-     
+
 '''
 '''
 predict_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:gamma')
