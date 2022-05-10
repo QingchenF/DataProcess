@@ -57,10 +57,18 @@ Test_data = np.asarray(Test_list)
 
 
 #Model
-predict_model = xgb.XGBRegressor(max_depth=6, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:linear')
+
+xgb_model = xgb.XGBRegressor(max_depth=6, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:linear')
+Hyper_param = {'min_samples_split':range(1000,2100,200), 'min_samples_leaf':range(30,71,10)}
+predict_model = GridSearchCV(estimator = xgb_model,param_grid = Hyper_param, scoring='mae',n_jobs=4,iid=False, cv=5)
 predict_model.fit(Train_data,Train_label)
 Predict_Score = predict_model.predict(Test_data)
 
+print("-best_estimator-",predict_model.best_estimator_,"-",
+      "-grid_scores-",   predict_model.grid_scores_,"-",
+      "-best_params-",   predict_model.best_params_,"-",
+      "-best_score-",    predict_model.best_score_
+      )
 #save model param
 joblib.dump(predict_model, "./pls_model.pkl")
 

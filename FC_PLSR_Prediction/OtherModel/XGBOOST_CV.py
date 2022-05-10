@@ -65,19 +65,29 @@ params = {
     'min_child_weight': 3,
     'silent': 1,
     'eta': 0.1,
-    'seed': 1000,
+    'seed': 1000,#随机数的种子
     'nthread': 4,
 }
 
 dtrain = xgb.DMatrix(Train_data, Train_label)
 print(dtrain, type(dtrain))
 num_rounds = 300
-plst = list(params.items())
-model = xgb.train(plst, dtrain, num_rounds)
+#plst = list(params.items())
+Predict_model = xgb.cv(
+    params,
+    dtrain,
+    num_boost_round=100,
+    nfold=5,
+    early_stopping_rounds=10,
+    verbose_eval=10,
+    metrics='mae'
+
+)
+#model = xgb.train(plst, dtrain, num_rounds)
 
 # 对测试集进行预测
 dtest = xgb.DMatrix(Test_data)
-ans = model.predict(dtest)
+ans = Predict_model.predict(dtest)
 print(ans)
 
 '''

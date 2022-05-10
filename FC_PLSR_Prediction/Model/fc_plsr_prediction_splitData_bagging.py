@@ -67,7 +67,7 @@ Test_data = np.asarray(Test_list)
 #Model
 #plsr = PLSRegression()
 
-#bagging,基分类器PLS
+#bagging,PLS
 bagging = BaggingRegressor(base_estimator=PLSRegression())
 
 #网格交叉验证
@@ -76,16 +76,15 @@ predict_model = GridSearchCV(bagging,param_grid,cv=5)
 predict_model.fit(Train_data,Train_label)
 
 print("----best_estimator-----",predict_model.best_estimator_)
+print("----grid_scores_-----",predict_model.grid_scores_)
+print("----best_params_-----",predict_model.best_params_)
+print("----best_score_-----",predict_model.best_score_)
+
+
 Predict_Score = predict_model.predict(Test_data)
 Predict_Score_new = np.transpose(Predict_Score)
 Corr = np.corrcoef(Predict_Score_new,Test_label)
 
-#plsr.fit(Train_data,Train_label)
-#Predict_Score = plsr.predict(Test_data)
-#Predict_Score = np.transpose(Predict_Score)
-#print(Predict_Score,Predict_Score.shape)
-#print(Test_label,Test_label.shape)
-#Corr = np.corrcoef(Predict_Score,Test_label)
 
 MAE_inv =  np.mean(np.abs(Predict_Score - Test_label))
 print('Prediction Result\n',Predict_Score)
