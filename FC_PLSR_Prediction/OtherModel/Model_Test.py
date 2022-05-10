@@ -9,11 +9,11 @@ from sklearn.cross_decomposition import PLSRegression
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import  BaggingRegressor
-
+import xgboost as xgb
 #Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
-label = label_files_all['ADHD']
+data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"),reverse=True)
+label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
+label = label_files_all['General']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
 
@@ -44,13 +44,16 @@ for j in Test_files:
     test_data_reshape = upper_tri_indexing(test_data)
     Test_list.append(test_data_reshape)
 Test_data = np.asarray(Test_list)
-
+#Model
+predict_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:gamma')
+predict_model.fit(Train_data,Train_label)
+Predict_Score = predict_model.predict(Test_data)
 # 保存模型,我们想要导入的是模型本身，所以用“wb”方式写入，即是二进制方式,DT是模型名字
 #pickle.dump(DT,open("pls_model.dat","wb"))   # open("dtr.dat","wb")意思是打开叫"dtr.dat"的文件,操作方式是写入二进制数据
 
 # 加载模型
-loaded_model = joblib.load("./pls_model.pkl")
+#loaded_model = joblib.load("./pls_model.pkl")
 
 # 使用模型,对测试数据集进行预测
-Predict_Score = loaded_model.predict(Test_data)
+#Predict_Score = loaded_model.predict(Test_data)
 print(Predict_Score)

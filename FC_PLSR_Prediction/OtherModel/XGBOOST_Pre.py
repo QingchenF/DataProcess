@@ -8,8 +8,8 @@ from sklearn.cross_decomposition import PLSRegression
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import joblib
-import ToolBox as tb
-
+import FC_PLSR_Prediction.ToolBox.ToolBox as tb
+import xgboost as xgb
 
 #Loading Data
 data_files_all = sorted(glob.glob("/home/cuizaixu_lab/fanqingchen/DATA/ABCD_FC_10min/*.nii"),reverse=True)
@@ -55,12 +55,10 @@ Test_data = np.asarray(Test_list)
 
 
 #Model
-plsr = PLSRegression()
-#GridSearchCV
-param_grid = {'n_components':[1,2,3,4,5,6,7,8,9,10]}
-predict_model = GridSearchCV(plsr,param_grid,cv=5)
-predict_model.fit(Train_data,Train_label)
-Predict_Score = predict_model.predict(Test_data)
+predict_model = xgb.XGBRegressor(max_depth=5, learning_rate=0.1, n_estimators=160, silent=False, objective='reg:gamma')
+predict_model.fit(X_train,Train_label)
+Predict_Score = predict_model.predict(X_test)
+
 #save model param
 joblib.dump(predict_model, "./pls_model.pkl")
 
