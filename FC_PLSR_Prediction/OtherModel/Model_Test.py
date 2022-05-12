@@ -52,7 +52,6 @@ Hyper_param = {'max_depth':range(3,10,2)}
 predict_model = GridSearchCV(estimator=xgb.XGBRegressor(booster='gbtree',learning_rate=0.1, n_estimators=160, verbosity=1,objective='reg:squarederror'),
                              param_grid=Hyper_param,
                              scoring='neg_mean_absolute_error',
-                             n_jobs=4,
                              verbose=1,
                              cv=5)
 predict_model.fit(Train_data,Train_label)

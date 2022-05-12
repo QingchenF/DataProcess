@@ -73,9 +73,6 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-fw = open("../Predict_Score_Conduct.csv", mode='w')
-for l in Predict_Score:
-    fw.write(str(l))
-    fw.write('\n')
+tb.ToolboxCSV('Predict_Score_Conduct.csv',Predict_Score)
 
 

@@ -25,10 +25,10 @@ label = label_files_all['General']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
 
-tb.ToolboxCSV_server('train_set_test.csv',X_train)
-tb.ToolboxCSV_server('train_y_test.csv',y_train)
-tb.ToolboxCSV_server('test_set_test.csv',X_test)
-tb.ToolboxCSV_server('test_y_test.csv',y_test)
+tb.ToolboxCSV_server('train_set_x.csv',X_train)
+tb.ToolboxCSV_server('train_y_x.csv',y_train)
+tb.ToolboxCSV_server('test_set_x.csv',X_test)
+tb.ToolboxCSV_server('test_y_x.csv',y_test)
 
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
@@ -60,7 +60,7 @@ Hyper_param = {'max_depth':range(3,10,2)}
 predict_model = GridSearchCV(estimator=xgb.XGBRegressor(booster='gbtree',learning_rate=0.1, n_estimators=160, verbosity=0, objective='reg:linear'),
                              param_grid=Hyper_param,
                              scoring='neg_mean_absolute_error',
-                             n_jobs=4,
+                             #n_jobs=4,
                              verbose=1,
                              cv=5)
 predict_model.fit(Train_data,Train_label)
@@ -79,7 +79,7 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 
-tb.ToolboxCSV_server('Predict_Score_Conduct.csv',Predict_Score)
+tb.ToolboxCSV_server('Predict_Score_General.csv',Predict_Score)
 
 
 
