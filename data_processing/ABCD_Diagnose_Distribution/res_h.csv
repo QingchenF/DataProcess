@@ -1,0 +1,45 @@
+﻿Diagnosis,Factor,Factor Score(Z)
+MDD,General,2.6383
+MDD,Conduct,1.6925
+MDD,ADHD,1.7987
+MDD,Int,2.3988
+APS,General,1.7491
+APS,Conduct,1.3533
+APS,ADHD,1.496
+APS,Int,1.1901
+Agoraphobia,General,1.9596
+Agoraphobia,Conduct,0.9771
+Agoraphobia,ADHD,1.4461
+Agoraphobia,Int,1.9578
+Sep Anxiety,General,2.2922
+Sep Anxiety,Conduct,1.0886
+Sep Anxiety,ADHD,1.6832
+Sep Anxiety,Int,2.1386
+Spec Phobia,General,0.6596
+Spec Phobia,Conduct,0.4243
+Spec Phobia,ADHD,0.5406
+Spec Phobia,Int,0.601
+GA,General,2.007
+GA,Conduct,0.7508
+GA,ADHD,1.3856
+GA,Int,2.4934
+OCD,General,1.0571
+OCD,Conduct,0.6591
+OCD,ADHD,0.8683
+OCD,Int,0.8703
+ADHD,General,1.4454
+ADHD,Conduct,1.0873
+ADHD,ADHD,1.6291
+ADHD,Int,0.6101
+ODD,General,1.8124
+ODD,Conduct,1.733
+ODD,ADHD,0.9886
+ODD,Int,0.6825
+Traumatic Stress,General,2.1591
+Traumatic Stress,Conduct,1.6093
+Traumatic Stress,ADHD,1.3983
+Traumatic Stress,Int,1.7299
+Conduct,General,2.033
+Conduct,Conduct,2.5141
+Conduct,ADHD,1.1366
+Conduct,Int,0.6161

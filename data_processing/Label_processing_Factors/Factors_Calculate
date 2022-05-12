@@ -1,0 +1,23 @@
+import csv
+import pandas as pd
+import numpy as np
+fw = open("/Users/fan/Desktop/factors_value_Int.csv",mode='w')
+
+file_1 = '/Users/fan/Documents/Data/ABCD/abcd_cbcl_baseline.csv'
+reader_file_1 = pd.read_csv(file_1)
+reader_1 = reader_file_1.iloc[:,8:]
+data_1 = reader_1.values
+
+
+
+file_2 = '/Users/fan/Documents/Data/ABCD/factors.csv'
+reader_file_2 = pd.read_csv(file_2)
+reader_2 = reader_file_2.iloc[:,5:6]
+data_2 = reader_2.values
+
+res = np.dot(data_1,data_2)
+#res = res/66  #取平均
+list1 = list(res)
+for i in list1:
+    fw.write(str(i))
+    fw.write('\n')
