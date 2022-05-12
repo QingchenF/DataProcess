@@ -10,10 +10,13 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import  BaggingRegressor
 import FC_PLSR_Prediction.ToolBox.ToolBox as tb
 import joblib
+from datetime import datetime
 #Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_Label_z.csv")
-label = label_files_all['General_Z']
+#data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
+#label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_Label_z.csv")
+data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
+label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
+label = label_files_all['General']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=1)
 
@@ -53,8 +56,9 @@ Test_data = np.asarray(Test_list)
 bagging = BaggingRegressor(base_estimator=PLSRegression())
 
 #网格交叉验证
+cv_times = 2
 param_grid = {'n_estimators':[1,2,3,4,5,6,7,8,9,10]}
-predict_model = GridSearchCV(bagging,param_grid,verbose=4,cv=5)
+predict_model = GridSearchCV(bagging,param_grid,verbose=4,cv=cv_times)
 predict_model.fit(Train_data,Train_label)
 
 print("-best_estimator-",predict_model.best_estimator_,"-",
@@ -72,6 +76,14 @@ MAE_inv = np.mean(np.abs(Predict_Score - Test_label))
 print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
+print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'),'Method:PLSRegression_bagging\n','cv:',cv_times)
+print(MAE_inv.shape,type(MAE_inv))
+res =  'MAE:' + str(MAE_inv) + '\
+       \nCorrelation:'+str(Corr[0,1])+'\
+       \nCV_times:'+str(cv_times)+''
+
+print(res)
+tb.send_result_Ding(res)
 
 tb.ToolboxCSV('Predict_Score_General.csv',Predict_Score)
 
