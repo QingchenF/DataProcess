@@ -23,7 +23,7 @@ data = np.around(data,decimals=4)
 print(len(data),type(data),data.shape)
 
 for j in range(len(data)):
-    np.savetxt('/Users/fan/Documents/Data/test_nii/'+label[j]+'.txt',data[j])
+    np.savetxt('/Users/fan/Documents/Data/test_nii/'+label[j]+'.txt',data[j])#np自带保存函数  #读取使用np.genfromtxt()
 #for j in range(len(data)):
 #    fw = open('/Users/fan/Documents/Data/test_nii/'+label[j]+'.txt', mode='w')
 #    fw.write(str(data[j]))
