@@ -81,7 +81,14 @@ print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
 print(datetime.now().strftime('%Y-%m-%d %H:%M:%S'),'Method:PLSRegression_bagging\n','cv:',cv_times)
-tb.send_result_Ding()
+
+res = 'MAE:' + str(MAE_inv) + '\
+       \nCorrelation:'+str(Corr[0,1])+'\
+       \nCV_times:'+str(cv_times)+' \
+       \nMethod:PLSRegression '
+
+
+tb.send_result_Ding(res)
 
 tb.ToolboxCSV_server('Predict_Score_General_bagging.csv',Predict_Score)
 

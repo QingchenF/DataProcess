@@ -30,7 +30,9 @@ def upper_tri_indexing(matirx):
     m = matirx.shape[0]
     r,c = np.triu_indices(m,1)
     return matirx[r,c]
-def send_result_Ding():
+
+def send_result_Ding(test):
     webhook = 'https://oapi.dingtalk.com/robot/send?access_token=36aecb847d993acde01b431d66e178e66b54b1aacf4013747c930aa621ec7e9e'
     xiaoding = DingtalkChatbot(webhook)
-    xiaoding.send_text(msg='over',is_at_all=False)
+    Res = 'Result:'+'\n' + test
+    xiaoding.send_text(msg=Res,is_at_all=False)
