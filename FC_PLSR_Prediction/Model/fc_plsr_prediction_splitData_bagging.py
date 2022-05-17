@@ -13,13 +13,13 @@ try:
     import joblib
     from datetime import datetime
     #Loading Data
-    #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-    #label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_Label_z.csv")
-    data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
-    label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
+    data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_FC_10min/*.nii"),reverse=True)
+    label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_CBCL_FQC_L.csv")
+    #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
+    #label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
     label = label_files_all['General']
 
-    X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2)
 
     tb.ToolboxCSV('train_set_b.csv',X_train)
     tb.ToolboxCSV('train_y_b.csv',y_train)
@@ -57,7 +57,7 @@ try:
     bagging = BaggingRegressor(base_estimator=PLSRegression())
 
     #网格交叉验证
-    cv_times = 2
+    cv_times = 5
     param_grid = {'n_estimators':[1,2,3,4,5,6,7,8,9,10]}
     predict_model = GridSearchCV(bagging,param_grid,verbose=4,cv=cv_times)
     predict_model.fit(Train_data,Train_label)

@@ -14,14 +14,13 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 #Loading Data
-data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
-label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
+#data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_FC_10min/*.nii"),reverse=True)
+#label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_CBCL_L.csv")
 
-#data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
-#label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
+data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
+label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
 tb.ToolboxCSV('data_all.csv',data_files_all)
 
-print(label_files_all)
 label = label_files_all['General']
 
 X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2,random_state=0)
@@ -57,15 +56,18 @@ Test_data = np.asarray(Test_list)
 
 
 #Model
-predict_model = xgb.XGBRegressor(max_depth=8, learning_rate=0.1, n_estimators=160, verbosity=0, objective='reg:linear')
+predict_model = xgb.XGBRegressor(max_depth=8, learning_rate=0.1, n_estimators=160, verbosity=3, objective='reg:linear')
 predict_model.fit(Train_data,Train_label)
 Predict_Score = predict_model.predict(Test_data)
-
+pd_import = predict_model.feature_importances_
+print("pd_import:",pd_import)
 #save model param
-joblib.dump(predict_model, "./pls_model.pkl")
+joblib.dump(predict_model, "./XGBOOST_model.pkl")
 
 Corr = np.corrcoef(Predict_Score.T,Test_label)
 MAE_inv = np.mean(np.abs(Predict_Score - Test_label))
+pm_score = predict_model.score(Test_data,Test_label)#R2
+print("R2:",pm_score)
 print('Prediction Result\n',Predict_Score)
 print('Correlation\n',Corr)
 print('MAE:',MAE_inv)
