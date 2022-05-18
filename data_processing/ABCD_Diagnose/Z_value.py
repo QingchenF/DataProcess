@@ -24,4 +24,4 @@ for j in list_1:
     a = '%.4f' % j
     fw.write(a)
     fw.write('\n')
-#test
+#test11
