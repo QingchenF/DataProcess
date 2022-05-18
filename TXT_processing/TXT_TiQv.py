@@ -24,6 +24,7 @@ res.sort(key = list1.index)
 print('处理后长度：',len(res))
 f.close()
 
+
 for i in res:
   data_10min_fc_ID.write(i)
   data_10min_fc_ID.write('\n')
