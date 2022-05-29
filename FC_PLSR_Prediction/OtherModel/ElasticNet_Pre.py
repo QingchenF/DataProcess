@@ -47,6 +47,7 @@ f_ytest = open("./Other_Model_Res/test_y",mode='w')
 for m in y_test:
     f_ytest.write(str(m))
     f_ytest.write('\n')
+
 Train_label = np.array(y_train)
 Test_label = np.array(y_test)
 

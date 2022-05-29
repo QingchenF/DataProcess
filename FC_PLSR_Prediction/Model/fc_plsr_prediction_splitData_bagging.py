@@ -13,10 +13,10 @@ try:
     import joblib
     from datetime import datetime
     #Loading Data
-    data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_FC_10min/*.nii"),reverse=True)
-    label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_CBCL_FQC_L.csv")
-    #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
-    #label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
+    #data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_FC_10min/*.nii"),reverse=True)
+    #label_files_all = pd.read_csv("/Users/fan/Documents/Data/ABCD_Factor_SHW/ABCD_CBCL_FQC_L.csv")
+    data_files_all = sorted(glob.glob("/Users/fan/Documents/Data/test_train/*.nii"))
+    label_files_all = pd.read_csv("/Users/fan/Documents/Data/test_train/test.csv")
     label = label_files_all['General']
 
     X_train, X_test, y_train, y_test = train_test_split(data_files_all,label,test_size=0.2)
@@ -40,6 +40,7 @@ try:
         files_data.append(img_data_reshape)
 
     Train_data = np.asarray(files_data)
+    print(Train_data.shape)
     #Test Data
     Test_files = X_test[:]
     Test_list = []
