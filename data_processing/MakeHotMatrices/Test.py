@@ -7,7 +7,7 @@ def upper_tri_indexing(matirx):
     m = matirx.shape[0]
     r,c = np.triu_indices(m,1)
     return matirx[r,c]
-m1 = scio.loadmat('./sub_01_BOLD_wm_corr_2.mat')
+m1 = scio.loadmat('matrices_1/sub_01_BOLD_wm_corr_2.mat')
 m1_np = m1['corr']
 m1_triu = np.triu(m1_np)
 m1_tril = np.tril(m1_np)
