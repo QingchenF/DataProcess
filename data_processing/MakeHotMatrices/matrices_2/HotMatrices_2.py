@@ -45,3 +45,18 @@ plt.savefig('BOLD_wm_corr.png',dpi=300)
 
 plt.show()
 
+mm = m1_tril + m2_triu
+
+cx = sns.heatmap(pd.DataFrame(np.round(mm,2)),
+                annot=False, xticklabels=False,vmin=-1.5,yticklabels=False, cmap="Blues",
+                cbar_kws = {'format': '%.1f'}
+                )
+
+cbar_3 = cx.collections[0].colorbar
+cbar_3.ax.tick_params(labelsize=14,left=False,right=False)
+plt.savefig('add.png',dpi=300)
+
+plt.show()
+
+
+
