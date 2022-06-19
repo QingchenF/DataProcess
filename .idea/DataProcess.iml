@@ -11,6 +11,7 @@
     <option name="namespacePackageFolders">
       <list>
         <option value="$MODULE_DIR$/data_processing/Make_Matrices" />
+        <option value="$MODULE_DIR$/data_processing/MakeHotMatrices" />
       </list>
     </option>
   </component>
