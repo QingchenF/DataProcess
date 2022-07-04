@@ -27,7 +27,7 @@ for i in data_files_all:
 data_files_all = np.array(data_files_all)
 x_data = np.asarray(files_data)
 
-epoch = 0
+epoch = 1
 outer_results = []
 outer_results_mae = []
 kf = KFold(n_splits=2, shuffle=True, random_state=22)
