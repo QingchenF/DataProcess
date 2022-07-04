@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="LabServer">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/cuizaixu_lab/fanqingchen/DATA/Code" local="$PROJECT_DIR$/../MappingServer/" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="fanqingchen@10.12.100.88:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/cuizaixu_lab/fanqingchen/DATA/Code" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
