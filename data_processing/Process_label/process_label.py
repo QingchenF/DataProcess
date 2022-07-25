@@ -20,7 +20,8 @@ for m in list_2:
         print(m)
        # list_3.append(list_1.index(m))
         list_3.append(m)
-print(len(list_3),list_3)
+
+
 
 #for n in list_3:
  #   fw.write(list_abcd[n])

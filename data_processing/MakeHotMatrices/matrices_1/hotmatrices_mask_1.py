@@ -19,7 +19,7 @@ with sns.axes_style("white"):
     #设置colorbar字体大小
     cbar = ax.collections[0].colorbar
 
-    cbar.ax.tick_params(labelsize=16, left=False,right=False)  #direction='in' 标签位置
+    cbar.ax.tick_params(labelsize=24, left=False,right=False)  #direction='in' 标签位置
     plt.savefig('a.png',dpi=300)
     plt.show()
 
@@ -30,11 +30,11 @@ mask = np.zeros_like(m2_np)
 #将mask的对角线及以上设置为True#这部分就是对应要被遮掉的部分
 mask[np.tril_indices_from(mask)] = True
 with sns.axes_style("white"):
-    ax = sns.heatmap(m2_np, xticklabels=False, yticklabels=False,vmax=0.9,mask=mask,annot=False,cmap="Blues",
+    ax = sns.heatmap(m2_np, xticklabels=False, yticklabels=False, vmax=0.8, mask=mask, annot=False, cmap="Blues",
                     cbar_kws = {'ticks': [-0.4, 0.0, 0.4, 0.8]}
                      )
     cbar_2 = ax.collections[0].colorbar
-    cbar_2.ax.tick_params(labelsize=16, left=False, right=False)
+    cbar_2.ax.tick_params(labelsize=24, left=False, right=False)
     #plt.figure(dpi=300, figsize=(4, 3))
     plt.savefig('b.png',dpi=300)
     plt.show()

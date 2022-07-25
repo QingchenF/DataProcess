@@ -11,7 +11,7 @@ x = np.array(x)
 #plt.scatter(x,y,alpha=0.6)
 plt.plot(x,y,'o',ls='--')
 
-plt.text(8.5, 2.2, "r = 0.03",size = 10,bbox = dict(alpha = 0.2))
+plt.text(1,1,"r = 0.03",size = 10,bbox = dict(alpha = 0.2))
 plt.xlabel('True',)
 plt.ylabel('Predict')
 plt.show()

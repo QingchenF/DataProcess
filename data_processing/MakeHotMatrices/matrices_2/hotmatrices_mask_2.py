@@ -6,7 +6,7 @@ import scipy.io as scio
 from PIL import Image
 from matplotlib import figure
 
-m1 = scio.loadmat('DSI_BOLD_corr_matrix_0605.mat')
+m1 = scio.loadmat('DSI_BOLD_corr_matrix_0720_withouttransformed.mat')
 print(m1)
 m1_np = m1['DSI_wm_corr']
 #以corr的形状生成一个全为0的矩阵
@@ -16,16 +16,16 @@ mask[np.triu_indices_from(mask)] = True
 with sns.axes_style("white"):
     ax = sns.heatmap(
         m1_np,
-        xticklabels=False, yticklabels=False ,vmax=1.0, mask=mask, annot=False, cmap="Blues",
-        cbar_kws={'format':'%.1f'}
-        )
+        xticklabels=False, yticklabels=False, vmax=1.0, vmin=-0.2, mask=mask, annot=False, cmap="Blues",
+        cbar_kws={'format': '%.1f', 'ticks': [-0.2, 0.4, 1.0]}
+        )#vmin=-0.2越小颜色会越深，vmax=1.0越小颜色越深
     #设置colorbar字体大小
-    cbar = ax.collections[0].colorbar
-    cbar.ax.tick_params(labelsize=14,pad=20,)  #direction='in' 刻度位置; labelrotation=45 标签旋转
-    plt.savefig('BOLD_wm_corr.png',dpi=300)
+    cbar_3 = ax.collections[0].colorbar
+    cbar_3.ax.tick_params(labelsize=28, left=False, right=False)  #direction='in' 刻度位置; labelrotation=45 标签旋转
+    plt.savefig('DSI_wm_corr_0720_c.png',dpi=300)
     plt.show()
 
-m2 = scio.loadmat('DSI_BOLD_corr_matrix_0605.mat')
+m2 = scio.loadmat('DSI_BOLD_corr_matrix_0720_withouttransformed.mat')
 m2_np = m2['BOLD_wm_corr']
 #以corr的形状生成一个全为0的矩阵
 mask = np.zeros_like(m2_np)
@@ -33,13 +33,13 @@ mask = np.zeros_like(m2_np)
 mask[np.tril_indices_from(mask)] = True
 with sns.axes_style("white"):
     ax = sns.heatmap(
-        m2_np, xticklabels=False, yticklabels=False, vmax=0.8,mask=mask,annot=False,cmap="Blues",
-
+        m2_np, xticklabels=False, yticklabels=False, vmax=0.9, mask=mask, annot=False,cmap="Blues",
+        cbar_kws={'format': '%.1f', 'ticks': [-0.2, 0.4, 1.0]}
     )
     cbar_2 = ax.collections[0].colorbar
-    cbar_2.ax.tick_params(labelsize=14,direction='in')
+    cbar_2.ax.tick_params(labelsize=28, direction='in',left=False, right=False)
     #plt.figure(dpi=300, figsize=(4, 3))
-    plt.savefig('SEEG_wm_corr.png',dpi=300)
+    plt.savefig('BOLD_wm_corr_0720_t.png',dpi=300)
     plt.show()
 
 '''

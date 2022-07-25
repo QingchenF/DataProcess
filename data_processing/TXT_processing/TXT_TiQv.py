@@ -28,3 +28,12 @@ for i in res:
   data_10min_fc_ID.write(i)
   data_10min_fc_ID.write('\n')
   print(i)
+def  a(b):
+    if b == 0:
+        return
+        print('nono')
+    else:
+        print('yes')
+a(1)
+from sklearn.decomposition import PCA
+PCA()
